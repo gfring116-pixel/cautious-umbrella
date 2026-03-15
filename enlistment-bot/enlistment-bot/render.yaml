@@ -1,0 +1,13 @@
+services:
+  - type: worker
+    name: rekrut-enlistment-bot
+    runtime: node
+    buildCommand: npm install
+    startCommand: node index.js
+    envVars:
+      - key: BOT_TOKEN
+        sync: false
+      - key: CLIENT_ID
+        sync: false
+      - key: GUILD_ID
+        sync: false

@@ -1,0 +1,19 @@
+{
+  "name": "rekrut-enlistment-bot",
+  "version": "2.0.0",
+  "description": "Advanced Discord Enlistment Bot — Colberg Grenadiers",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "deploy": "node deploy-commands.js"
+  },
+  "dependencies": {
+    "discord.js": "^14.14.1",
+    "dotenv": "^16.4.5",
+    "axios": "^1.6.8"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "type": "commonjs"
+}
