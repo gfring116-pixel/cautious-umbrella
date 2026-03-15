@@ -30,6 +30,8 @@ const client = new Client({
     GatewayIntentBits.MessageContent,
   ],
   partials: [Partials.GuildMember],
+  rest: { timeout: 60000 },
+  failIfNotExists: false,
 });
 
 client.commands = new Collection();
@@ -60,8 +62,15 @@ if (!process.env.MONGODB_URI) { console.error('❌  MONGODB_URI missing!'); proc
 console.log('🔄  Attempting Discord login...');
 console.log('🔑  Token starts with:', config.token?.substring(0, 10));
 
+
+
 (async () => {
   try {
+    client.on('error', (err) => console.error('❌ Client error:', err.message));
+client.on('warn', (msg) => console.warn('⚠️ Warning:', msg));
+client.on('shardDisconnect', (event) => console.error('🔴 Disconnected:', event));
+client.on('shardReconnecting', () => console.log('🔄 Reconnecting...'));
+client.on('shardResume', () => console.log('✅ Resumed connection'));
     await connect();
     console.log('🔄  Logging into Discord...');
     await client.login(config.token);
