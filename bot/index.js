@@ -11,12 +11,15 @@ const PORT = process.env.PORT || 3000;
 http.createServer((_, res) => { res.writeHead(200); res.end('online'); })
   .listen(PORT, () => console.log(`✅  HTTP on port ${PORT}`));
 
-// ── Self-ping every 4 min ─────────────────────
-setInterval(() => {
+// ── Self-ping to stay alive ───────────────────
+function ping() {
   const url = process.env.RENDER_EXTERNAL_URL;
   if (!url) return;
-  https.get(url, r => console.log(`🔁  Ping ${r.statusCode}`)).on('error', e => console.warn('⚠️  Ping fail:', e.message));
-}, 4 * 60 * 1000);
+  https.get(url).on('error', () => {});
+}
+
+ping(); // ping immediately on startup
+setInterval(ping, 1 * 60 * 1000); // then every 1 minute
 
 // ── Discord client ────────────────────────────
 const client = new Client({
