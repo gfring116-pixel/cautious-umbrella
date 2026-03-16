@@ -8,7 +8,7 @@ module.exports = {
   clientId: process.env.CLIENT_ID,
   guildId:  process.env.GUILD_ID,
 
-  serverName: 'Colberg Grenadiers',
+  serverName: 'North German Confederation',
 
   colors: {
     accent:    0x2B5EA7,
